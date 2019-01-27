@@ -24,12 +24,16 @@ class Cube:
 		self.B = [Color.blue] * 9
 
 	def __eq__(self, other):
-		return self.U == other.U \
-			and self.D == other.D \
-			and self.R == other.R \
-			and self.L == other.L \
-			and self.F == other.F \
-			and self.B == other.B
+		if not isinstance(other, Cube):
+			return False
+		sameU = self.U == other.U
+		sameD = self.D == other.D
+		sameR = self.R == other.R
+		sameL = self.L == other.L
+		sameF = self.F == other.F
+		sameB = self.B == other.B
+		sameCube = sameU and sameD and sameR and sameL and sameF and sameB
+		return sameCube
 
 	@staticmethod
 	def rotated_face(orig_face, quarters):
@@ -82,11 +86,11 @@ class Cube:
 			self.F[2], self.F[5], self.F[8] = tuple(self.D[i] for i in (2, 5, 8))
 			self.D[2], self.D[5], self.D[8] = temp
 		elif move == "L":
-			self.L = Cube.rotated_face(self.R, 1)
+			self.L = Cube.rotated_face(self.L, 1)
 			temp = tuple(self.D[i] for i in (0, 3, 6))
 			self.D[0], self.D[3], self.D[6] = tuple(self.F[i] for i in (0, 3, 6))
-			self.F[2], self.F[5], self.F[8] = tuple(self.U[i] for i in (0, 3, 6))
-			self.U[6], self.U[3], self.U[0] = tuple(self.B[i] for i in (8, 5, 2))
+			self.F[0], self.F[3], self.F[6] = tuple(self.U[i] for i in (0, 3, 6))
+			self.U[0], self.U[3], self.U[6] = tuple(self.B[i] for i in (8, 5, 2))
 			self.B[8], self.B[5], self.B[2] = temp
 		elif move == "F":
 			self.F = Cube.rotated_face(self.F, 1)
@@ -96,7 +100,7 @@ class Cube:
 			self.D[2], self.D[1], self.D[0] = tuple(self.R[i] for i in (0, 3, 6))
 			self.R[0], self.R[3], self.R[6] = temp
 		elif move == "B":
-			self.F = Cube.rotated_face(self.F, 1)
+			self.B = Cube.rotated_face(self.B, 1)
 			temp = tuple(self.U[i] for i in (2, 1, 0))
 			self.U[2], self.U[1], self.U[0] = tuple(self.R[i] for i in (8, 5, 2))
 			self.R[8], self.R[5], self.R[2] = tuple(self.D[i] for i in (6, 7, 8))

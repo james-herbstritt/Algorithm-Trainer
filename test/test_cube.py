@@ -3,6 +3,7 @@
 import unittest
 from algtrainer import Cube
 
+
 class TestCube(unittest.TestCase):
 	def test_equality(self):
 		self.assertEqual(Cube(), Cube())
@@ -10,9 +11,23 @@ class TestCube(unittest.TestCase):
 	def test_do_move(self):
 		cube1 = Cube()
 		cube = Cube()
-		cube.do_move("F")
-		cube.do_move("F'")
+
+		for i in "U D R L F B x y z u d r l f b M E S".split():
+			cube.do_move(i)
+			cube.do_move(i + "'")
+			self.assertEqual(cube, cube1)
+			cube.do_move(i + "2")
+			cube.do_move(i + "2")
+			self.assertEqual(cube, cube1)
+
+		cube.do_move("x2")
+		cube.do_move("y2")
+		cube.do_move("z2")
 		self.assertEqual(cube, cube1)
+		for i in "x y z x y z".split():
+			cube.do_move(i)
+		self.assertEqual(cube, cube1)
+
 		for _ in range(6):
 			cube.do_move("R")
 			cube.do_move("U")
