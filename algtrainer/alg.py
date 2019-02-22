@@ -6,6 +6,7 @@ class Algorithm:
 		self.name = name
 		self.alg_str = alg_str
 		self.cube = Algorithm.undo_alg(alg_str, "z2")
+		self.times = []
 
 	@staticmethod
 	def reverse_alg(alg_str):
@@ -24,3 +25,10 @@ class Algorithm:
 		rev_alg_str = Algorithm.reverse_alg(alg_str)
 		p = " ".join((premoves, rev_alg_str))
 		return Cube(premoves=p)
+
+	@staticmethod
+	def load_json(json):
+		return Algorithm(json["name"], json["algorithm"])
+
+	def dump_json(self):
+		return { "name": self.name, "algorithm": self.alg_str }
