@@ -1,0 +1,89 @@
+{
+	"set": "PLL",
+	"algorithms": [
+		{
+			"name": "Aa Perm",
+			"algorithm": "l' U R' D2 R U' R' D2 R2 x'"
+		},
+		{
+			"name": "Ab Perm",
+			"algorithm": "l' R' D2 R U R' D2 R U' R x'"
+		},
+		{
+			"name": "E Perm",
+			"algorithm": "x' R U' R' D R U R' D' R U R' D R U' R' D' x"
+		},
+		{
+			"name": "F Perm",
+			"algorithm": "R' U' F' R U R' U' R' F R2 U' R' U' R U R' U R"
+		},
+		{
+			"name": "Ga Perm",
+			"algorithm": "R2 u R' U R' U' R u' R2 y' R' U R"
+		},
+		{
+			"name": "Gb Perm",
+			"algorithm": "R' U' R y R2 u R' U R U' R u' R2"
+		},
+		{
+			"name": "Gc Perm",
+			"algorithm": "R2 u' R U' R U R' u R2 y R U' R'"
+		},
+		{
+			"name": "Gd Perm",
+			"algorithm": "R U R' y' R2 u' R U' R' U R' u R2"
+		},
+		{
+			"name": "H Perm",
+			"algorithm": "M2 U M2 U2 M2 U M2"
+		},
+		{
+			"name": "Ja Perm",
+			"algorithm": "R' U L' U2 R U' R' U2 R L"
+		},
+		{
+			"name": "Jb Perm",
+			"algorithm": "R U R' F' R U R' U' R' F R2 U' R'"
+		},
+		{
+			"name": "Na Perm",
+			"algorithm": "R U R' U R U R' F' R U R' U' R' F R2 U' R' U2 R U' R'"
+		},
+		{
+			"name": "Nb Perm",
+			"algorithm": "R' U L' U2 R U' L R' U L' U2 R U' L"
+		},
+		{
+			"name": "Ra Perm",
+			"algorithm": "R U R' F' R U2 R' U2 R' F R U R U2 R'"
+		},
+		{
+			"name": "Rb Perm",
+			"algorithm": "R' U2 R U2 R' F R U R' U' R' F' R2"
+		},
+		{
+			"name": "T Perm",
+			"algorithm": "R U R' U' R' F R2 U' R' U' R U R' F'"
+		},
+		{
+			"name": "Ua Perm",
+			"algorithm": "R U' R U R U R U' R' U' R2"
+		},
+		{
+			"name": "Ub Perm",
+			"algorithm": "R2 U R U R' U' R' U' R' U R'"
+		},
+		{
+			"name": "V Perm",
+			"algorithm": "R' U R' d' R' F' R2 U' R' U R' F R F"
+		},
+		{
+			"name": "Y Perm",
+			"algorithm": "F R U' R' U' R U R' F' R U R' U' R' F R F'"
+		},
+		{
+			"name": "Z Perm",
+			"algorithm": "M2 U M2 U M' U2 M2 U2 M'"
+		}
+	]
+}
