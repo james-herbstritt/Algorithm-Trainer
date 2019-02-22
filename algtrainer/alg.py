@@ -36,3 +36,7 @@ class Algorithm:
 			"algorithm": self.alg_str,
 			"times": self.times
 		}
+
+	def average(self):
+		tot = len(self.times)
+		return sum([time / tot for time in self.times])

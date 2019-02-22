@@ -13,3 +13,9 @@ class AlgSet:
 	def dump_json(self):
 		algs = [alg.dump_json() for alg in self.algs]
 		return { "set": self.name, "algorithms": algs }
+
+	def averages(self):
+		return [
+			{ "algorithm": alg.name, "average": alg.average() }
+			for alg in self.algs
+		]

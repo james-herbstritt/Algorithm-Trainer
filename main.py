@@ -50,18 +50,19 @@ def main():
 			alg = random.choice(algset.algs)
 			print(alg.name)
 			time.sleep(1)
-			print("Start")
+			print("\aStart")
 			t.start()
-			c = getch()
-			if c == "q":
-				break
+			getch()
 			t.stop()
 			alg.times.append(t.elapsed())
 			print(t.elapsed())
+			c = getch()
+			if c == "q":
+				break
 	except KeyboardInterrupt:
 		pass
 	print()
-	print(json.dumps(algset.dump_json(), indent=4, sort_keys=True))
+	print(json.dumps(algset.averages(), indent=4, sort_keys=True))
 
 if __name__ == "__main__":
 	main()
