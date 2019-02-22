@@ -10,10 +10,9 @@ class Color(Enum):
 	blue = 5
 	green = 6
 
-
 class Cube:
 	# str -> Cube
-	def __init__(self, rotate=""):
+	def __init__(self, premoves=""):
 
 		# array of 9 colors
 		self.U = [Color.white] * 9
@@ -22,6 +21,8 @@ class Cube:
 		self.L = [Color.orange] * 9
 		self.F = [Color.green] * 9
 		self.B = [Color.blue] * 9
+
+		self.do_moves(premoves)
 
 	def __eq__(self, other):
 		if not isinstance(other, Cube):
