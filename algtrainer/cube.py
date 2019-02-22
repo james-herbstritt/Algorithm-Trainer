@@ -1,6 +1,7 @@
 # Michael Goodnow and James Herbstritt
 from enum import Enum
-from PIL import Image
+from PIL import Image, ImageDraw
+
 
 class Color(Enum):
 	white = 1
@@ -9,6 +10,7 @@ class Color(Enum):
 	orange = 4
 	blue = 5
 	green = 6
+
 
 class Cube:
 	# str -> Cube
@@ -82,30 +84,42 @@ class Cube:
 		elif move == "R":
 			self.R = Cube.rotated_face(self.R, 1)
 			temp = tuple(self.B[i] for i in (6, 3, 0))
-			self.B[6], self.B[3], self.B[0] = tuple(self.U[i] for i in (2, 5, 8))
-			self.U[2], self.U[5], self.U[8] = tuple(self.F[i] for i in (2, 5, 8))
-			self.F[2], self.F[5], self.F[8] = tuple(self.D[i] for i in (2, 5, 8))
+			self.B[6], self.B[3], self.B[0] = tuple(
+				self.U[i] for i in (2, 5, 8))
+			self.U[2], self.U[5], self.U[8] = tuple(
+				self.F[i] for i in (2, 5, 8))
+			self.F[2], self.F[5], self.F[8] = tuple(
+				self.D[i] for i in (2, 5, 8))
 			self.D[2], self.D[5], self.D[8] = temp
 		elif move == "L":
 			self.L = Cube.rotated_face(self.L, 1)
 			temp = tuple(self.D[i] for i in (0, 3, 6))
-			self.D[0], self.D[3], self.D[6] = tuple(self.F[i] for i in (0, 3, 6))
-			self.F[0], self.F[3], self.F[6] = tuple(self.U[i] for i in (0, 3, 6))
-			self.U[0], self.U[3], self.U[6] = tuple(self.B[i] for i in (8, 5, 2))
+			self.D[0], self.D[3], self.D[6] = tuple(
+				self.F[i] for i in (0, 3, 6))
+			self.F[0], self.F[3], self.F[6] = tuple(
+				self.U[i] for i in (0, 3, 6))
+			self.U[0], self.U[3], self.U[6] = tuple(
+				self.B[i] for i in (8, 5, 2))
 			self.B[8], self.B[5], self.B[2] = temp
 		elif move == "F":
 			self.F = Cube.rotated_face(self.F, 1)
 			temp = tuple(self.U[i] for i in (6, 7, 8))
-			self.U[6], self.U[7], self.U[8] = tuple(self.L[i] for i in (8, 5, 2))
-			self.L[8], self.L[5], self.L[2] = tuple(self.D[i] for i in (2, 1, 0))
-			self.D[2], self.D[1], self.D[0] = tuple(self.R[i] for i in (0, 3, 6))
+			self.U[6], self.U[7], self.U[8] = tuple(
+				self.L[i] for i in (8, 5, 2))
+			self.L[8], self.L[5], self.L[2] = tuple(
+				self.D[i] for i in (2, 1, 0))
+			self.D[2], self.D[1], self.D[0] = tuple(
+				self.R[i] for i in (0, 3, 6))
 			self.R[0], self.R[3], self.R[6] = temp
 		elif move == "B":
 			self.B = Cube.rotated_face(self.B, 1)
 			temp = tuple(self.U[i] for i in (2, 1, 0))
-			self.U[2], self.U[1], self.U[0] = tuple(self.R[i] for i in (8, 5, 2))
-			self.R[8], self.R[5], self.R[2] = tuple(self.D[i] for i in (6, 7, 8))
-			self.D[6], self.D[7], self.D[8] = tuple(self.L[i] for i in (0, 3, 6))
+			self.U[2], self.U[1], self.U[0] = tuple(
+				self.R[i] for i in (8, 5, 2))
+			self.R[8], self.R[5], self.R[2] = tuple(
+				self.D[i] for i in (6, 7, 8))
+			self.D[6], self.D[7], self.D[8] = tuple(
+				self.L[i] for i in (0, 3, 6))
 			self.L[0], self.L[3], self.L[6] = temp
 		# Rotations
 		elif move == "x":
@@ -168,5 +182,50 @@ class Cube:
 			raise ValueError("Invalid move: %s." % move)
 
 	# Cube str -> "image"
-	def drawFace(self, face):
-		print("Not Implemented")
+	def draw_u_face(self, face):
+
+		img = Image.new('RGBA', (400, 400), (255, 255, 255, 0))
+
+		draw = ImageDraw.Draw(img)
+
+		for j in range(3):
+			for i in range(3):
+				color = self.U[j * 3 + i].name
+				print(i, j)
+				x0, x1 = (100 * i + 50, 100 * (i + 1) - 1 + 50)
+				y0, y1 = (100 * j + 50, 100 * (j + 1) - 1 + 50)
+				print(x0, y0, x1, y1)
+				draw.rectangle([x0, y0, x1, y1], fill=color, outline="black")
+
+		# draw F
+		x0, y0 = (50, 350)
+		for x in range(3):
+			color = self.F[x].name
+			x1, y1 = (x0 + 100 - 1, y0 + 50 - 1)
+			draw.rectangle([x0, y0, x1, y1], fill=color, outline="black")
+			x0 += 100
+
+		# draw R
+		x0, y0 = (350, 50)
+		for x in range(3):
+			color = self.R[2 - x].name
+			x1, y1 = (x0 + 50 - 1, y0 + 100 - 1)
+			draw.rectangle([x0, y0, x1, y1], fill=color, outline="black")
+			y0 += 100
+
+		# draw B
+		x0, y0 = (50, 0)
+		for x in range(3):
+			color = self.B[2 - x].name
+			x1, y1 = (x0 + 100 - 1, y0 + 50 - 1)
+			draw.rectangle([x0, y0, x1, y1], fill=color, outline="black")
+			x0 += 100
+
+		# draw L
+		x0, y0 = (0, 50)
+		for x in range(3):
+			color = self.L[x].name
+			x1, y1 = (x0 + 50 - 1, y0 + 100 - 1)
+			draw.rectangle([x0, y0, x1, y1], fill = color, outline="black")
+			y0 += 100
+		return img
