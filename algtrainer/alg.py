@@ -31,4 +31,8 @@ class Algorithm:
 		return Algorithm(json["name"], json["algorithm"])
 
 	def dump_json(self):
-		return { "name": self.name, "algorithm": self.alg_str }
+		return {
+			"name": self.name,
+			"algorithm": self.alg_str,
+			"times": self.times
+		}
